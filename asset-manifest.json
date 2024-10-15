@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/aastra-shastra/static/css/main.2160b3a7.css",
+    "main.js": "/aastra-shastra/static/js/main.c1868f44.js",
+    "static/js/453.0d16feda.chunk.js": "/aastra-shastra/static/js/453.0d16feda.chunk.js",
+    "index.html": "/aastra-shastra/index.html",
+    "main.2160b3a7.css.map": "/aastra-shastra/static/css/main.2160b3a7.css.map",
+    "main.c1868f44.js.map": "/aastra-shastra/static/js/main.c1868f44.js.map",
+    "453.0d16feda.chunk.js.map": "/aastra-shastra/static/js/453.0d16feda.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2160b3a7.css",
+    "static/js/main.c1868f44.js"
+  ]
+}
