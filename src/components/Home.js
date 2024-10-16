@@ -4,6 +4,7 @@ const Home = () => {
   const [saviours, setSaviours] = useState([]);
   const [loading, setLoading] = useState(false); // Loading state
   const [nearestSaviour, setNearestSaviour] = useState(null); // Nearest saviour state
+  const [location, setLocation] = useState(null); // User location state
 
   // Function to simulate fetching saviours nearby
   const getNearbySaviours = (latitude, longitude) => {
@@ -11,9 +12,10 @@ const Home = () => {
     setTimeout(() => {
       // Simulate saviours based on location after a delay
       const mockSaviours = [
-        { id: 1, name: 'Saurabh', distance: 100 },  // Distance in meters
-        { id: 2, name: 'Rishiraj', distance: 200 },
-        { id: 3, name: 'Gaurav', distance: 300 },
+        { id: 1, name: 'Saurabh Devi', distance: 0 },  // Distance in meters
+        { id: 2, name: 'Rishiraj Dutta', distance: 1 },
+        { id: 3, name: 'Gaurav Yadav', distance: 1.1 },
+        { id: 4, name: 'Kuhsal Sharma', distance: 0.5 }
       ];
       setSaviours(mockSaviours);
       setNearestSaviour(mockSaviours[0]); // Assume the first saviour is the nearest one
@@ -28,6 +30,7 @@ const Home = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
+          setLocation({ latitude, longitude });
           console.log('Location:', latitude, longitude);
 
           // Fetch nearby saviours
@@ -89,6 +92,22 @@ const Home = () => {
     marginBottom: '10px',
   };
 
+  const coordinatesContainerStyle = {
+    marginTop: '20px',
+    padding: '16px',
+    backgroundColor: '#f0f8ff', // Light blue background
+    borderRadius: '8px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    textAlign: 'center',
+  };
+
+  const coordinateStyle = {
+    fontSize: '18px',
+    fontWeight: 'bold',
+    margin: '5px 0',
+    color: '#333',
+  };
+
   return (
     <div style={{ padding: '20px' }}>
       {/* SOS Button */}
@@ -100,6 +119,30 @@ const Home = () => {
           SOS
         </button>
       </div>
+
+      {/* Display user's current location */}
+      {location && (
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+          <h3>Your Location:</h3>
+          <div style={coordinatesContainerStyle}>
+            <p style={coordinateStyle}>Latitude: {location.latitude}</p>
+            <p style={coordinateStyle}>Longitude: {location.longitude}</p>
+          </div>
+
+          {/* Embed Google Map with dynamic latitude and longitude */}
+          <div style={{ marginTop: '20px', textAlign: 'center' }}>
+            <iframe
+              width="100%"
+              height="300"
+              frameBorder="0"
+              style={{ border: 0 }}
+              src={`https://www.google.com/maps/embed/v1/view?key=AIzaSyDcRrm5jbs9DQ5PHv_YXQJsGjWPMSqfClw&center=${location.latitude},${location.longitude}&zoom=14`}
+              allowFullScreen
+              title="Current Location Map"
+            ></iframe>
+          </div>
+        </div>
+      )}
 
       {/* Display saviour count and nearest saviour if available */}
       {!loading && saviours.length > 0 && (
